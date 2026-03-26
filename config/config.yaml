@@ -41,7 +41,7 @@ app:
 # ===============================================================
 schedule:
   enabled: true                         # 是否启用调度系统
-  preset: "morning_evening"             # 预设模板名称（见上方说明）
+  preset: "office_hours"             # 预设模板名称（见上方说明）
 
 
 # ===============================================================
@@ -57,8 +57,6 @@ platforms:
   sources:
     - id: "toutiao"
       name: "今日头条"
-    - id: "baidu"
-      name: "百度热搜"
     - id: "wallstreetcn-hot"
       name: "华尔街见闻"
     - id: "thepaper"
@@ -67,10 +65,6 @@ platforms:
       name: "bilibili 热搜"
     - id: "cls-hot"
       name: "财联社热门"
-    - id: "ifeng"
-      name: "凤凰网"
-    - id: "tieba"
-      name: "贴吧"
     - id: "weibo"
       name: "微博"
     - id: "douyin"
@@ -113,19 +107,87 @@ rss:
   # - 正整数：覆盖全局设置，只推送此天数内的文章
   # - 0：禁用此频道的新鲜度过滤，推送所有文章
   feeds:
-    - id: "hacker-news"
-      name: "Hacker News"
-      url: "https://hnrss.org/frontpage"
-
     - id: "ruanyifeng"
       name: "阮一峰的网络日志"
       url: "http://www.ruanyifeng.com/blog/atom.xml"
       enabled: false                  # 禁用
       # max_age_days: 3               # 示例：推送 3 天内的文章（更新较慢的博客）
-     
-    - id: "yahoo-finance"
-      name: "雅虎财经"
-      url: "https://finance.yahoo.com/news/rssindex"
+
+    - id: "jiemian"
+      name: "界面新闻"
+      url: "https://feedx.net/rss/jiemian.xml"
+
+    - id: "zaobao"
+      name: "联合早报"
+      url: "https://feedx.net/rss/zaobao.xml"
+
+    - id: "infzm"
+      name: "南方周末"
+      url: "https://feedx.net/rss/infzm.xml"
+
+    - id: "ap"
+      name: "AP"
+      url: "https://feedx.net/rss/ap.xml"
+
+    - id: "scmp"
+      name: "南华早报"
+      url: "https://feedx.net/rss/scmp.xml"
+
+    - id: "axios"
+      name: "Axios"
+      url: "https://api.axios.com/feed/"
+
+    - id: "meduza"
+      name: "Meduza"
+      url: "https://meduza.io/rss/all"
+
+    - id: "aljazeera"
+      name: "Al Jazeera"
+      url: "https://plink.anyfeeder.com/aljazeera/news"
+
+    - id: "guardian"
+      name: "The Guardian"
+      url: "https://feeds.guardian.co.uk/theguardian/world/rss"
+
+    - id: "nytimes"
+      name: "纽约时报"
+      url: "https://www.nytimes.com/services/xml/rss/nyt/HomePage.xml"
+
+    - id: "wsj"
+      name: "华尔街日报"
+      url: "https://feeds.content.dowjones.io/public/rss/RSSWorldNews"
+
+    - id: "economist"
+      name: "经济学人"
+      url: "https://economistnew.buzzing.cc/feed.xml"
+
+    - id: "bloomberg"
+      name: "彭博社"
+      url: "https://bloombergnew.buzzing.cc/feed.xml"
+
+    - id: "reuters"
+      name: "路透社"
+      url: "https://reutersnew.buzzing.cc/feed.xml"
+
+    - id: "cna"
+      name: "中央社"
+      url: "https://feedx.net/rss/cna.xml"
+
+    - id: "dw"
+      name: "DW"
+      url: "https://rss.dw.com/rdf/rss-en-all"
+
+    - id: "le-monde"
+      name: "Le Monde"
+      url: "https://www.lemonde.fr/rss/une.xml"
+
+    - id: "ft"
+      name: "FT"
+      url: "https://www.ft.com/world?format=rss"
+
+    - id: "bbc"
+      name: "BBC"
+      url: "https://feeds.bbci.co.uk/news/rss.xml"
 
     # 自定义源示例
     # - id: "custom-feed"
@@ -151,7 +213,7 @@ rss:
 # - incremental：最少打扰，只看新增
 # ===============================================================
 report:
-  mode: "current"                     # daily | current | incremental（schedule 开启时作为默认值）
+  mode: "daily"                     # daily | current | incremental（schedule 开启时作为默认值）
 
   display_mode: "keyword"             # 分组维度: keyword | platform
                                       # keyword: 按关键词分组显示（默认）
@@ -202,7 +264,7 @@ filter:
 # - 模型配置统一在下方 ai 段
 # ===============================================================
 ai_filter:
-  batch_size: 200                         # 每批发送给 AI 的标题数（控制单次 API 调用量）
+  batch_size: 500                         # 每批发送给 AI 的标题数（控制单次 API 调用量）
                                           # 新闻超过此数量时自动分批处理
   batch_interval: 2                       # 分批处理时，每批之间的等待时间（秒）
                                           # 避免频繁调用 API 触发限流，设为 0 则不等待
@@ -251,14 +313,7 @@ display:
   #   1. 在此列表中
   #   2. 下方 regions 中对应开关为 true
   region_order:
-    - new_items                           # 1️⃣ 新增热点区域
-    - hotlist                             # 2️⃣ 热榜区域（关键词匹配 / AI 智能筛选）
-    - rss                                 # 3️⃣ RSS 订阅区域
-    - standalone                          # 4️⃣ 独立展示区
-    - ai_analysis                         # 5️⃣ AI 分析区域
-
-  # 推送区域开关
-  # 控制各区域是否启用（配合 region_order 使用）
+    - ai_analysis                       # 5️⃣ AI 分析区域
   regions:
     hotlist: true                     # 热榜区域（关键词匹配 / AI 智能筛选）
     new_items: false                   # 新增热点区域（含热榜新增 + RSS 新增）
@@ -268,19 +323,12 @@ display:
                                       # 开启后将对 RSS 进行关键词分析并在通知中展示
                                       # 关闭后跳过分析，但独立展示区不受影响
 
-    standalone: false                 # 独立展示区（完整热榜/RSS，不受关键词过滤）
-    ai_analysis: true                 # AI 分析区域
-
-  # 📋 独立展示区配置
-  # 用途：将指定平台的完整热榜/RSS 数据独立提取，不受关键词过滤影响
-  # 两个独立用途：
-  #   - 推送展示：由 regions.standalone 开关控制，在推送中单独展示完整热榜
-  #   - AI 分析：由 ai_analysis.include_standalone 开关控制，将完整数据送入 AI 做深度分析
-  # 两者共享此处的平台/RSS 配置，但开关互相独立（可只开 AI 分析、不推送展示）
+    standalone: true                 # 独立展示区（完整热榜/RSS，不受关键词过滤）
+    ai_analysis: true # AI 分析区域
   standalone:
-    platforms: ["zhihu", "wallstreetcn-hot"]     # 热榜平台 ID 列表（如 ["zhihu", "weibo"]）
-    rss_feeds: []                     # RSS 源 ID 列表（如 ["hacker-news"]）
-    max_items: 20                     # 每个源最多展示条数（0=不限制）
+    platforms: ["zhihu","thepaper"] # 热榜平台 ID 列表（如 ["zhihu", "weibo"]）
+    rss_feeds: ["ap","reuters","zaobao","scmp","bbc","nytimes"] # RSS 源 ID 列表（如 ["hacker-news"]）  
+    max_items: 40                     # 每个源最多展示条数（0=不限制）
 
 
 # ===============================================================
@@ -415,7 +463,7 @@ ai:
   # 完整列表: https://docs.litellm.ai/docs/providers
   # 如果你对于看英文文档比较头疼，那么可以点击页面右下角的 【Ask AI】 ,用中文询问怎么配置 
   
-  model: "deepseek/deepseek-chat"
+  model: ""
 
   api_key: ""                       # API Key（建议使用环境变量 AI_API_KEY）
   
@@ -433,16 +481,16 @@ ai:
                                     #    (原理：前缀 openai/ 强制 LiteLLM 使用 OpenAI 协议格式进行通信)
 
 
-  timeout: 120                      # 请求超时（秒）
+  timeout: 200                      # 请求超时（秒）
 
   temperature: 1.0                  # 采样温度 (0.0-2.0)
                                     # 注意：部分模型(如 gpt-5)可能要求必须为 1.0，否则会报错
   
-  max_tokens: 5000                  # 最大生成 token 数
+  max_tokens: 8192                  # 最大生成 token 数
                                     # 注意：如果 API 不支持此参数(报 HTTP 400)，请设为 0 以禁用发送
   # 高级选项
-  num_retries: 1                    # 失败重试次数
-  fallback_models: []               # 备用模型列表（可选）
+  num_retries: 2                    # 失败重试次数
+  fallback_models: ["openai/gpt-5.2", "openai/gpt-5.1", "openai/gpt-5"]               # 备用模型列表（可选）
                                     # 示例: ["openai/gpt-4o-mini", "openai/deepseek-ai/DeepSeek-V3"]
 
   # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -495,7 +543,7 @@ ai_analysis:
   mode: "follow_report"
 
   # 分析内容配置
-  max_news_for_analysis: 150        # 热榜+RSS 合计参与分析的新闻数量上限（控制成本关键项）
+  max_news_for_analysis: 1500        # 热榜+RSS 合计参与分析的新闻数量上限（控制成本关键项）
                                     # 热榜优先占用配额，RSS 使用剩余配额；独立展示区不受此限制
                                     # 推送消息顶部会显示实际的 AI 分析数供参考
 
@@ -507,7 +555,7 @@ ai_analysis:
                                       # GitHub Action 部署默认推送约 20 次（每小时推送一次）， 约 0.1 元/天
                                       # Docker 部署默认推送 48 次(每半小时推送一次)， 约 0.2 元/天
 
-  include_rss: false                # 是否包含 RSS 内容进行分析
+  include_rss: true                # 是否包含 RSS 内容进行分析
   
   include_standalone: true          # 是否将独立展示区数据纳入 AI 分析
                                     # 数据源列表来自 display.standalone.platforms / display.standalone.rss_feeds
