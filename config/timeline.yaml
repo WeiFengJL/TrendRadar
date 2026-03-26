@@ -237,7 +237,7 @@ presets:
     periods:
       morning_briefing:
         name: "到岗速览"
-        start: "09:00"
+        start: "08:00"
         end: "11:00"
         analyze: true              # AI 分析当前热点
         ai_mode: "current"         # AI 分析当前榜单
@@ -256,8 +256,8 @@ presets:
 
       closing_summary:
         name: "收工汇总"
-        start: "17:00"
-        end: "19:00"
+        start: "19:00"
+        end: "21:00"
         analyze: true              # AI 做全天汇总分析
         ai_mode: "daily"           # AI 也分析全天内容
         push: true                 # 下班前推送当日完整汇总
@@ -288,8 +288,8 @@ presets:
       3: "workday"
       4: "workday"
       5: "workday"
-      6: "weekend"                 # 周六 → 周末计划
-      7: "weekend"                 # 周日 → 周末计划
+      6: "workday"                 # 周六 → 周末计划
+      7: "workday"                 # 周日 → 周末计划
 
 
   # ───────────────────────────────────────────────────────────
