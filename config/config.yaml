@@ -326,8 +326,8 @@ display:
     standalone: true                 # 独立展示区（完整热榜/RSS，不受关键词过滤）
     ai_analysis: true # AI 分析区域
   standalone:
-    platforms: ["zhihu","thepaper"] # 热榜平台 ID 列表（如 ["zhihu", "weibo"]）
-    rss_feeds: ["ap","reuters","zaobao","scmp","bbc","nytimes"] # RSS 源 ID 列表（如 ["hacker-news"]）  
+    platforms: ["zhihu","weibo","toutiao","thepaper"] # 热榜平台 ID 列表（如 ["zhihu", "weibo"]）
+    rss_feeds: ["reuters","zaobao","scmp","ap","dw","bbc","meduza","aljazeera"] # RSS 源 ID 列表（如 ["hacker-news"]）  
     max_items: 40                     # 每个源最多展示条数（0=不限制）
 
 
@@ -490,7 +490,7 @@ ai:
                                     # 注意：如果 API 不支持此参数(报 HTTP 400)，请设为 0 以禁用发送
   # 高级选项
   num_retries: 2                    # 失败重试次数
-  fallback_models: ["openai/gpt-5.2", "openai/gpt-5.1", "openai/gpt-5"]               # 备用模型列表（可选）
+  fallback_models: ["openai/gpt-5.2", "openai/gpt-5.4", "openai/gpt-5"]               # 备用模型列表（可选）
                                     # 示例: ["openai/gpt-4o-mini", "openai/deepseek-ai/DeepSeek-V3"]
 
   # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -543,7 +543,7 @@ ai_analysis:
   mode: "follow_report"
 
   # 分析内容配置
-  max_news_for_analysis: 1500        # 热榜+RSS 合计参与分析的新闻数量上限（控制成本关键项）
+  max_news_for_analysis: 2000        # 热榜+RSS 合计参与分析的新闻数量上限（控制成本关键项）
                                     # 热榜优先占用配额，RSS 使用剩余配额；独立展示区不受此限制
                                     # 推送消息顶部会显示实际的 AI 分析数供参考
 
