@@ -97,10 +97,10 @@ class RemoteStorageBackend(SQLiteStorageMixin, StorageBackend):
         # - 腾讯云 COS 和 阿里云 OSS 使用 SigV2 以避免 chunked encoding 问题
         # - 其他服务商（AWS S3、Cloudflare R2、MinIO 等）默认使用 SigV4
         use_sigv2 = "myqcloud.com" in endpoint_url.lower() or "aliyuncs.com" in endpoint_url.lower()
-        signature_version = 's3' if use_sigv2 else 's3v4'
+        signature_version = 's3'
 
         s3_config = BotoConfig(
-            s3={"addressing_style": "virtual"},
+            s3={"addressing_style": "path"},
             signature_version=signature_version,
         )
 
