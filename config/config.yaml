@@ -65,6 +65,8 @@ platforms:
       name: "bilibili 热搜"
     - id: "cls-hot"
       name: "财联社热门"
+    - id: "solidot"
+      name: "Solidot"
     - id: "weibo"
       name: "微博"
     - id: "douyin"
@@ -121,9 +123,9 @@ rss:
       name: "联合早报"
       url: "https://feedx.net/rss/zaobao.xml"
 
-    - id: "infzm"
-      name: "南方周末"
-      url: "https://feedx.net/rss/infzm.xml"
+    - id: "indian-express"
+      name: "The Indian Express"
+      url: "https://indianexpress.com/section/world/feed/"
 
     - id: "ap"
       name: "AP"
