@@ -169,9 +169,13 @@ rss:
       name: "路透社"
       url: "https://reutersnew.buzzing.cc/feed.xml"
 
+    - id: "nhk"
+      name: "NHK"
+      url: "https://feedx.net/rss/cna.xml"
+
     - id: "cna"
       name: "中央社"
-      url: "https://feedx.net/rss/cna.xml"
+      url: "https://www3.nhk.or.jp/rss/news/cat6.xml"
 
     - id: "dw"
       name: "DW"
