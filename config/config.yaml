@@ -331,8 +331,8 @@ display:
     ai_analysis: true # AI 分析区域
   standalone:
     platforms: ["zhihu","weibo","toutiao","thepaper"] # 热榜平台 ID 列表（如 ["zhihu", "weibo"]）
-    rss_feeds: ["reuters","zaobao","scmp","ap","dw","bbc","meduza","aljazeera"] # RSS 源 ID 列表（如 ["hacker-news"]）  
-    max_items: 40                     # 每个源最多展示条数（0=不限制）
+    rss_feeds: ["reuters","jiemian","zaobao","scmp","ap","dw","bbc","meduza","aljazeera"] # RSS 源 ID 列表（如 ["hacker-news"]）  
+    max_items: 50                     # 每个源最多展示条数（0=不限制）
 
 
 # ===============================================================
